@@ -12,32 +12,36 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Restaurant_Table")
 public class RestaurantDto {
-		@Id
-		@Column(name="Restaurant_Id" ,length =5)
-		String restaurantId;
-	
-		
-		@Column(name = "Restaurant_name", length = 20)
-		String restaurantName;
-		
-		@OneToOne(cascade=CascadeType.ALL)
-		@JoinColumn(name = "Address_id")
-		AddressDto address;
-		
-		@ManyToMany(cascade=CascadeType.ALL)
-		@JoinTable(name = "restaurant_items", joinColumns = { @JoinColumn(name = "restaurant_id") }, inverseJoinColumns = { @JoinColumn(name = "item_id") })
-		List<ItemDto> item = new ArrayList<ItemDto>();
+	@Id
+	@Column(name="Restaurant_Id" ,length =5)
+	String restaurantId;
 
-		@Column(name="Manager_Name")
-		String managerName;
-		
-		@Column(name="Contact_Number")
-		String contactNumber;
-		
+	
+	@Column(name = "Restaurant_name")
+	@Size(min=1,max=20,message="restaurant name must be in given limits")
+	String restaurantName;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "Address_id")
+	AddressDto address;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name = "restaurant_items", joinColumns = { @JoinColumn(name = "restaurant_id") }, inverseJoinColumns = { @JoinColumn(name = "item_id") })
+	List<ItemDto> item = new ArrayList<ItemDto>();
+
+	@Column(name="Manager_Name")
+	@Size(min=1,max=10,message="manager name must be in given limits")
+	String managerName;
+	
+	@Column(name="Contact_Number")
+	@Pattern(regexp="[6-9]{1}[0-9]{9}",message="number should be valid")
+	String contactNumber;
 
 		public RestaurantDto() {
 			super();

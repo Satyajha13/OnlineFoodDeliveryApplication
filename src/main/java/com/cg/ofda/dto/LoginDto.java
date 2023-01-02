@@ -4,22 +4,25 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="Login_Table")
 public class LoginDto {
 	
 	
-		@Id
-		@Column(name = "Login_userid",length = 3)
-		 String userid;
-		
-		@Column(name = "Login_userName",length = 20)
-		String userName;
+	@Id
+	@Column(name = "Login_userid",length = 3)
+	@NotBlank(message="user id cannot be blank")
+	 String userid;
+	
+	@Column(name = "Login_userName",length = 20)
+	@NotBlank(message="user name cannot be blank")
+	String userName;
 
-		@Column(name = "Login_password",length = 3)
-		String password;
-		
+	@Column(name = "Login_password",length = 3)
+	@NotBlank(message="password cannot be blank")
+	String password;
 		
 		public LoginDto() {
 			super();

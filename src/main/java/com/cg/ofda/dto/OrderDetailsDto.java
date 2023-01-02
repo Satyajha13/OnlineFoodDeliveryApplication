@@ -10,23 +10,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 
 
 @Entity
 @Table(name = "OrderDetails")
 public class OrderDetailsDto {
-		@Id
-		@Column(name = "Order_ID",length =3)
-		int orderId;
-	 
-		LocalDateTime orderDate;
-		@Column( name = "Order_Status",length = 20)
-		String orderStatus;
-		
-		@OneToOne(cascade=CascadeType.ALL)
-		@JoinColumn(name = "cart_Id")
-		FoodCartDto cart;
+	@Id
+	@Column(name = "Order_ID",length =3)
+	@NotNull(message="order cannot be null")
+	int orderId;
+ 
+	LocalDateTime orderDate;
+	@Column( name = "Order_Status",length = 20)
+	String orderStatus;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "cart_Id")
+	FoodCartDto cart;
 
 		public OrderDetailsDto() {
 			super();

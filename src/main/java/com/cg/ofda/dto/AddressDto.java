@@ -3,29 +3,38 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name="Address_table")
 
 public class AddressDto {
 	
-		@Id
-		@Column(name="Address_Id")
-		String addressid;
-		@Column(name="Building_Name")
-		String buildingName;
-		@Column(name="Street_No")
-		String streetNo;
-		@Column(name="Area")
-		String area;
-		@Column(name="City")
-		String city;
-		@Column(name="State")
-		String state;
-		@Column(name="Country")
-		String country;
-		@Column(name="Pincode")
-		String pincode;
-		
+	@Id
+	@Column(name="Address_Id",length=10)
+	@NotNull(message="Address cannot be blank")
+	String addressid;
+	@Column(name="Building_Name",length=20)
+	@NotBlank(message="Building name cannot be blank")
+	String buildingName;
+	@Column(name="Street_No",length=5)
+	@NotBlank(message="street number cannot be blank ")
+	String streetNo;
+	@Column(name="Area",length=15)
+	@NotBlank(message="area cannot be blank")
+	String area;
+	@Column(name="City",length=15)
+	@NotBlank(message="city cannot be blank")
+	String city;
+	@Column(name="State",length=15)
+	@NotBlank(message="state cannot be blank")
+	String state;
+	@Column(name="Country",length=10)
+	@NotBlank(message="country cannot be blank")
+	String country;
+	@Column(name="Pincode",length=7)
+	@NotBlank(message="pincode cannot be blank")
+	String pincode;
 
 		public AddressDto() {
 			// TODO Auto-generated constructor stub

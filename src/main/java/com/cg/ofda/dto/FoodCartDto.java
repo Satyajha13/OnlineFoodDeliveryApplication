@@ -11,12 +11,14 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="FoodCart_Table")
 public class FoodCartDto {
 	@Id
 	@Column(name="Cart_Id",length = 5)
+	@NotNull(message="cart id cannot be null")
 	String cartId;
 	
 	@OneToOne
@@ -26,7 +28,7 @@ public class FoodCartDto {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "foodCart_items", joinColumns = { @JoinColumn(name = "cartId") }, inverseJoinColumns = { @JoinColumn(name = "item_id") })
 	List<ItemDto> items = new ArrayList<ItemDto>();
-		
+	
 		public FoodCartDto(String cartId, CustomerDto customer, List<ItemDto> itemList) {
 			super();
 			this.cartId = cartId;

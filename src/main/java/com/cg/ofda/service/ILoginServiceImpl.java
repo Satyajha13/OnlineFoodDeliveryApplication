@@ -19,8 +19,8 @@ public class ILoginServiceImpl implements ILoginService {
 
 
 /* @author : Satya 
- * @return : true 
- * @description : This method signin user  in the repository and returns true
+ * @return : 
+ * @description : This method signin user  in the repository and returns welcome with username
  */
   
   public  LoginDto signIn(LoginDto login1) {
@@ -36,6 +36,13 @@ public class ILoginServiceImpl implements ILoginService {
 		}
 		return  login.get();
 	}
+  
+  
+
+  /* @author : Satya 
+  * @return : true 
+  * @description : This method signout user  in the repository and returns true
+  */
 
    public LoginDto viewUser(String userId) {
 	   return loginRepository.findById(userId).get();

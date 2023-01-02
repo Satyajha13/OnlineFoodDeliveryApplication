@@ -9,25 +9,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Bill_Table")
 public class BillDto {
+	
 	@Id
 	@Column(name="Bill_Id", length = 10)
+	@NotNull(message="bill id cannot be null")
 	String billId;
-	
 	@Column(name="Bill_Date", length = 10)
+	@NotBlank(message="date cannot be blank")
 	LocalDate billDate;
-	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "order_Id")
 	OrderDetailsDto order;
-	
 	@Column(name="Total_Items")
+	@NotNull(message="total items cannnot be null")
 	int totalItems;
-	
 	@Column(name="TotalCost", length = 8)
+	@NotNull(message="total cost cannot be null ")
 	double totalCost;
 		
 		

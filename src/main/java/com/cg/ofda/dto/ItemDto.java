@@ -15,15 +15,22 @@ import jakarta.persistence.ManyToMany;
 
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Item_Table")
 public class ItemDto {
 	@Id
 	@Column(name ="Item_Id", length = 5)
+	@NotNull(message="item id cannot be null")
 	String itemId;
 	
 	@Column(name = "Item_Name", length = 10)
+	@NotBlank(message="name cannot be null")
 	String itemName;
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -31,9 +38,12 @@ public class ItemDto {
 	CategoryDto category;
 	
 	@Column(name="quantity", length = 5)
+	@Size(min=0,max=5,message="quantity should be in given limits")
 	int quantity;
 	
 	@Column(name="cost", length = 5)
+	@Max(value = 10000)
+	@Min(value = 10)
 	double cost;
 	
 	@ManyToMany(cascade=CascadeType.ALL,mappedBy= "item")

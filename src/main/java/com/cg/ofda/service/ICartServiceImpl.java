@@ -18,6 +18,11 @@ public class ICartServiceImpl implements ICartService{
 	@Autowired
 	IItemRepository itemRepository;
 	
+	
+	/* @author : Usha *
+	 * @return : cart *
+	 *@description :This method adds cart to the repository and returns cart*/
+
 	@Override
 	public FoodCartDto addItemToCart(String cartId, ItemDto item) throws CartException{
 		if(cartRepository.existsById(cartId)) {
@@ -30,9 +35,20 @@ public class ICartServiceImpl implements ICartService{
 			throw new CartException("Cart Id not found");
 	}
 	
+	
+	/* @author : Usha *
+	 * @return : cart *
+	 *@description : This method displays the cart using cart from the repository and returns the cart having that ID*/
+
+	
 	public FoodCartDto viewCartById(String cartId) {
 		return cartRepository.findById(cartId).get();
 	}
+	
+	/* @author : Usha *
+	 * @return : cart  *
+	 *@description : This method deletes the cart using id and return cart*/
+
 
 	@Override
 	public FoodCartDto clearCart(String cartId) throws CartException{
@@ -43,12 +59,22 @@ public class ICartServiceImpl implements ICartService{
 		}
 		else throw new CartException("Cart Id not found");
 	}
+	
+	/* @author : Usha
+	 * @return : cart
+	 * @description : This method is to view  all the  cart.
+	 */
+
 
 	@Override
 	public List<FoodCartDto> viewCart() {
 		return cartRepository.findAll();
 	}
 
+	/* @author : Usha
+	 * @return : true 
+	 * @description : This method is to increase quantity of food item.
+	 */
 	@Override
 	public FoodCartDto increaseQuantity(String cartId, String itemId, int quantity) throws CartException{
 		ItemDto it = null;
@@ -66,7 +92,12 @@ public class ICartServiceImpl implements ICartService{
 		}
 		else
 			throw new CartException("Cart Id not found");
+		
 	}
+	/* @author : Usha
+	 * @return : true 
+	 * @description : This method is to reduce quantity of food item.*/
+	
 	@Override
 	public FoodCartDto reduceQuantity(String cartId, String itemId, int quantity) throws CartException {
 		ItemDto it = null;
@@ -86,6 +117,10 @@ public class ICartServiceImpl implements ICartService{
 			throw new CartException("Cart Id not found");
 	}
 	
+	/* @author : Usha
+	 * @return : true 
+	 * @description : This method is to remove item of cart.
+	 */
 	public FoodCartDto removeItem(String cartId, String itemId) throws CartException {
 		if(cartRepository.existsById(cartId)) {
 			FoodCartDto cart = cartRepository.findById(cartId).get();

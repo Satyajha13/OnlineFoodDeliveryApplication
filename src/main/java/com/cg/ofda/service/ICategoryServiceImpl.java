@@ -13,6 +13,12 @@ public class ICategoryServiceImpl implements ICategoryService {
 	@Autowired
 	ICategoryRepository categoryRepository;
 	
+	
+
+	/* @author : Swetha
+	 * @return : true 
+	 * @description : This method is to add category.
+	 */
 	@Override
 	public CategoryDto addCategory(CategoryDto cat) throws CategoryException{
 		if(categoryRepository.existsById(cat.getCatId()))
@@ -23,12 +29,23 @@ public class ICategoryServiceImpl implements ICategoryService {
 		}
 	}
 
+	/* @author : Swetha
+	 * @return : true 
+	 * @description : This method is to update category.
+	 */
+
 	@Override
 	public CategoryDto updateCategory(CategoryDto cat) {
 		categoryRepository.save(cat);
 		return cat;
 	}
 
+	
+	/* @author : Swetha
+	 * @return : true 
+	 * @description : This method is to remove category.
+	 */
+	
 	@Override
 	public CategoryDto removeCategory(String catId) throws CategoryException {
 		if(categoryRepository.existsById(catId)) {
@@ -41,12 +58,22 @@ public class ICategoryServiceImpl implements ICategoryService {
 		
 	}
 	
+	/* @author : Swetha
+	 * @return : true 
+	 * @description : This method is to view category.
+	 */
 	@Override
 	public CategoryDto viewCategory(String catId) {
 		Optional<CategoryDto> findById = categoryRepository.findById(catId);
 
 		return findById.orElseThrow(() -> new CategoryException("There are no category having id:" + catId));
 	}
+	
+
+	/* @author : Swetha
+		 * @return : true 
+		 * @description : This method is to viewAll category.
+		 */
 
 
 	@Override
